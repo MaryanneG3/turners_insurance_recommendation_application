@@ -48,11 +48,12 @@
 .responseContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  height: 80%;
+  height: auto;
   width: 100%;
-  margin: 30px;
+  margin: 20px 40px;
+  padding-right: 10px;
 
   /* background-color: rgb(31, 13, 16); */
 }
@@ -60,45 +61,43 @@
 .AI_response,
 .user_response {
   margin-block: 20px;
-  width: 80%;
+  width: 65%;
+  padding: 10px 15px;
+  border-radius: 20px;
 }
 
 .AI_response {
-  margin-right: 110px;
-  background-color: white;
-}
+  margin-right: 150px;
 
-.AI_response p {
   display: inline;
   align-items: center;
-  padding: 10px 15px;
-  margin: 0;
+
   text-align: left;
-  border-radius: 30px;
+  background-color: white;
   border: 1px solid #5dccff;
 }
 
 .user_response {
-  text-align: right;
-  margin-left: 110px;
-}
+  margin-left: 150px;
 
-.user_response p {
   display: inline;
   align-items: center;
-  padding: 10px 15px;
-  margin: 0;
-  text-align: right;
-  border-radius: 30px;
+
+  text-align: center;
+
   border: 1px solid #5dccff;
   background-color: #5dccff;
+  color: white;
 }
+
+/* ---------------------------------------------------------------- */
+/* scroll bar */
 
 .scrollContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 90%;
+  min-height: 90%;
   width: 100%;
 
   overflow-y: scroll;
@@ -108,15 +107,15 @@
 }
 
 .scrollContainer::-webkit-scrollbar {
-  width: 20px;
+  width: 10px;
 }
 
 .scrollContainer::-webkit-scrollbar-track {
   border-radius: 100vw;
   /* margin-block: 20px; */
-  background-color: #7ad1f7;
+  /* background-color: #7ad1f7; */
 
-  box-shadow: 0 0 10px 2px rgba(51, 181, 242, 0.579);
+  border: 1px solid grey;
 }
 
 .scrollContainer::-webkit-scrollbar-thumb {
@@ -124,6 +123,8 @@
   border-radius: 100vw;
   box-shadow: inset 0 0 0 4px #7ad1f7, inset 0 0 0 2px #7ad1f7;
 }
+
+/* ---------------------------------------------------------------- */
 
 .userInputContainer {
   display: flex;

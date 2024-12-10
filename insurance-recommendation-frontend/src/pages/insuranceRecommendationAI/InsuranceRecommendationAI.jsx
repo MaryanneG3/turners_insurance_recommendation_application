@@ -1,6 +1,14 @@
 import BaseLayout from "../../layouts/baselayout/BaseLayout";
 import styles from "./InsuranceRecommendationAI.module.css";
 
+const responseHistory = [
+  "Hi! I'm Tina, your AI Insurance Policy Advisor. How can I help you today?",
+  "Hi Tina! I would like to know more about the insurance policies.",
+  "Sure! I can help you with that. What type of insurance are you looking for?",
+  "I am looking for car insurance. I own a 2019 Toyota Corolla.",
+  "Sure! I can help you with that. What type of insurance are you looking for? Sure! I can help you with that. What type of insurance are you looking for? Sure! I can help you with that. What type of insurance are you looking for? Sure! I can help you with that. What type of insurance are you looking for? Sure! I can help you with that. What type of insurance are you looking for?Sure! I can help you with that. What type of insurance are you looking for?",
+];
+
 function InsuranceRecommendationAI() {
   return (
     <BaseLayout>
@@ -12,32 +20,17 @@ function InsuranceRecommendationAI() {
           <div className={styles.chatDisplayArea}>
             <div className={styles.scrollContainer}>
               <div className={styles.responseContainer}>
-                <div className={styles.AI_response}>
-                  <p>
-                    Hi! I'm Tina, your AI Insurance Policy Advisor. How can I
-                    help you today?
-                  </p>
-                </div>
-
-                <div className={styles.user_response}>
-                  <p>
-                    Hi Tina! I would like to know more about the insurance
-                    policies.
-                  </p>
-                </div>
-
-                <div className={styles.AI_response}>
-                  <p>
-                    Sure! I can help you with that. What type of insurance are
-                    you looking for?
-                  </p>
-                </div>
-
-                <div className={styles.user_response}>
-                  <p>
-                    I am looking for car insurance. I own a 2019 Toyota Corolla.
-                  </p>
-                </div>
+                {responseHistory.map((response, index) =>
+                  index % 2 === 0 ? (
+                    <div className={styles.AI_response} key={index}>
+                      {response}
+                    </div>
+                  ) : (
+                    <div className={styles.user_response} key={index}>
+                      {response}
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>
