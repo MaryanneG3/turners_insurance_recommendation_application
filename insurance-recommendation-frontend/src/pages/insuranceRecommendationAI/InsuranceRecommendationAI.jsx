@@ -7,60 +7,37 @@ function InsuranceRecommendationAI() {
       <div className={styles.mainContainer}>
         <div className={styles.ChatBotContainer}>
           <h1 className={styles.chatbotHeading}>
-            Chat with Tina! - Your AI Insurance Policy Advisor
+            Chat with Tina - Your AI Insurance Policy Advisor
           </h1>
           <div className={styles.chatDisplayArea}>
-            <div className={styles.AI_responseContainer}>
-              <div className={styles.scrollContainer}>
-                "Hi! I'm Tina, your AI Insurance Policy Advisor. How can I help
-                you today? Hi! I'm Tina, your AI Insurance Policy Advisor. How
-                can I help you today? Hi! I'm Tina, your AI Insurance Policy
-                Advisor. How can I help you today? Hi! I'm Tina, your AI
-                Insurance Policy Advisor. How can I help you today? Hi! I'm
-                Tina, your AI Insurance Policy Advisor. How can I help you
-                today? Hi! I'm Tina, your AI Insurance Policy Advisor. How can I
-                help you today? Hi! I'm Tina, your AI Insurance Policy Advisor.
-                How can I help you today? Hi! I'm Tina, your AI Insurance Policy
-                Advisor. How can I help you today? Hi! I'm Tina, your AI
-                Insurance Policy Advisor. How can I help you today? Hi! I'm
-                Tina, your AI Insurance Policy Advisor. How can I help you
-                today?Hi! I'm Tina, your AI Insurance Policy Advisor. How can I
-                help you today? Hi! I'm Tina, your AI Insurance Policy Advisor.
-                How can I help you today? Hi! I'm Tina, your AI Insurance Policy
-                Advisor. How can I help you today? Hi! I'm Tina, your AI
-                Insurance Policy Advisor. How can I help you today? Hi! I'm
-                Tina, your AI Insurance Policy Advisor. How can I help you
-                today? Hi! I'm Tina, your AI Insurance Policy Advisor. How can I
-                help you today? Hi! I'm Tina, your AI Insurance Policy Advisor.
-                How can I help you today? Hi! I'm Tina, your AI Insurance Policy
-                Advisor. How can I help you today? Hi! I'm Tina, your AI
-                Insurance Policy Advisor. How can I help you today? Hi! I'm
-                Tina, your AI Insurance Policy Advisor. How can I help you
-                today?Hi! I'm Tina, your AI Insurance Policy Advisor. How can I
-                help you today? Hi! I'm Tina, your AI Insurance Policy Advisor.
-                How can I help you today? Hi! I'm Tina, your AI Insurance Policy
-                Advisor. How can I help you today? Hi! I'm Tina, your AI
-                Insurance Policy Advisor. How can I help you today? Hi! I'm
-                Tina, your AI Insurance Policy Advisor. How can I help you
-                today? Hi! I'm Tina, your AI Insurance Policy Advisor. How can I
-                help you today? Hi! I'm Tina, your AI Insurance Policy Advisor.
-                How can I help you today? Hi! I'm Tina, your AI Insurance Policy
-                Advisor. How can I help you today? Hi! I'm Tina, your AI
-                Insurance Policy Advisor. How can I help you today? Hi! I'm
-                Tina, your AI Insurance Policy Advisor. How can I help you
-                today?Hi! I'm Tina, your AI Insurance Policy Advisor. How can I
-                help you today? Hi! I'm Tina, your AI Insurance Policy Advisor.
-                How can I help you today? Hi! I'm Tina, your AI Insurance Policy
-                Advisor. How can I help you today? Hi! I'm Tina, your AI
-                Insurance Policy Advisor. How can I help you today? Hi! I'm
-                Tina, your AI Insurance Policy Advisor. How can I help you
-                today? Hi! I'm Tina, your AI Insurance Policy Advisor. How can I
-                help you today? Hi! I'm Tina, your AI Insurance Policy Advisor.
-                How can I help you today? Hi! I'm Tina, your AI Insurance Policy
-                Advisor. How can I help you today? Hi! I'm Tina, your AI
-                Insurance Policy Advisor. How can I help you today? Hi! I'm
-                Tina, your AI Insurance Policy Advisor. How can I help you
-                today?"
+            <div className={styles.scrollContainer}>
+              <div className={styles.responseContainer}>
+                <div className={styles.AI_response}>
+                  <p>
+                    Hi! I'm Tina, your AI Insurance Policy Advisor. How can I
+                    help you today?
+                  </p>
+                </div>
+
+                <div className={styles.user_response}>
+                  <p>
+                    Hi Tina! I would like to know more about the insurance
+                    policies.
+                  </p>
+                </div>
+
+                <div className={styles.AI_response}>
+                  <p>
+                    Sure! I can help you with that. What type of insurance are
+                    you looking for?
+                  </p>
+                </div>
+
+                <div className={styles.user_response}>
+                  <p>
+                    I am looking for car insurance. I own a 2019 Toyota Corolla.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
