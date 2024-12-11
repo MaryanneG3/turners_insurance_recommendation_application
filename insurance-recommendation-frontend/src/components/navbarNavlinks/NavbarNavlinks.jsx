@@ -101,6 +101,10 @@ function NavbarNavlinks({ toggleVehicleMenu }) {
               to: "/tools/insurance-quote-estimation-calculator",
               label: "Insurance Premium Calculator",
             },
+            {
+              to: "/tools/mock-interview-ai",
+              label: "Mock Interview AI",
+            },
           ]}
         />
 
