@@ -3,11 +3,11 @@ import BaseLayout from "../../layouts/baselayout/BaseLayout";
 import styles from "./InsuranceRecommendationAI.module.css";
 
 function InsuranceRecommendationAI() {
-  const [interviewStarted, setInterviewStarted] = useState(false);
   const [sessionId, setSessionId] = useState(null);
   const [error, setError] = useState(null);
   const [responses, setResponses] = useState([]);
 
+  // START CHAT HERE < -------------------------------------------------------
   const startChat = async () => {
     setError(null);
 
@@ -17,7 +17,7 @@ function InsuranceRecommendationAI() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           prompt:
-            "You are Tina, a car insurance policy advisor. You are having a conversation with a user who is interested in receiving an insurance policy recommendation. Start the conversation by introducting yourself and asking the user a good start up question to get the conversation going about their insurance needs.",
+            "You are Tina, a car insurance policy advisor. You are having a conversation with a user who is interested in receiving an insurance policy recommendation. Start the conversation by introducing yourself and asking the user a good start up question with a yes or no answer to see if they want to discuss their insurance needs. Do not suggest answers.",
         }),
       });
 
@@ -31,8 +31,7 @@ function InsuranceRecommendationAI() {
       const data = await response.json();
 
       setSessionId(data.sessionId);
-      setResponses([data.tinasResponse]);
-      setInterviewStarted(true);
+      setResponses([{ type: "tina", text: data.tinasResponse }]);
     } catch (err) {
       console.error("Error starting interview:", err);
       setError(err.message);
@@ -43,6 +42,7 @@ function InsuranceRecommendationAI() {
     startChat();
   }, []);
 
+  // HANDLE RESPONSES HERE < -------------------------------------------------------
   const handleResponse = async (userResponse) => {
     if (!userResponse.trim()) {
       alert("Please provide a valid response.");
@@ -50,6 +50,12 @@ function InsuranceRecommendationAI() {
     }
 
     setError(null);
+
+    // Add user response as soon as user submits it - type: user text: userResponse
+    setResponses((prevResponses) => [
+      ...prevResponses,
+      { type: "user", text: userResponse },
+    ]);
 
     try {
       const response = await fetch("http://localhost:3000/process-response", {
@@ -64,7 +70,12 @@ function InsuranceRecommendationAI() {
       }
 
       const data = await response.json();
-      console.log(data);
+
+      // Add Tina's response to the state
+      setResponses((prevResponses) => [
+        ...prevResponses,
+        { type: "tina", text: data.tinasResponse },
+      ]);
     } catch (error) {
       console.error("Error generating content: ", error);
       setError(error.message);
@@ -81,17 +92,18 @@ function InsuranceRecommendationAI() {
           <div className={styles.chatDisplayArea}>
             <div className={styles.scrollContainer}>
               <div className={styles.responseContainer}>
-                {responses.map((response, index) =>
-                  response ? (
-                    <div className={styles.AI_response} key={index}>
-                      {response}
-                    </div>
-                  ) : (
-                    <div className={styles.user_response} key={index}>
-                      {response}
-                    </div>
-                  )
-                )}
+                {responses.map((response, index) => (
+                  <div
+                    key={index}
+                    className={
+                      response.type === "tina"
+                        ? styles.AI_response
+                        : styles.user_response
+                    }
+                  >
+                    {response.text}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -111,7 +123,10 @@ function InsuranceRecommendationAI() {
               }}
             />
 
-            <button onClick={handleResponse} className={styles.submitButton}>
+            <button
+              onClick={() => handleResponse("")}
+              className={styles.submitButton}
+            >
               Submit
             </button>
           </div>
