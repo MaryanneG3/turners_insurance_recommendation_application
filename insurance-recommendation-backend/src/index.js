@@ -44,7 +44,7 @@ app.post("/start-chat", async (req, res) => {
 });
 
 // Endpoint for handling the responses from the user <---------------------------------
-// Endpoint for handling the responses from the user
+
 app.post("/process-response", async (req, res) => {
   const { userResponse } = req.body;
   const sessionId = Object.keys(session)[0]; // Retrieve the session ID (assuming single session for simplicity)
@@ -103,7 +103,7 @@ app.post("/process-response", async (req, res) => {
         - "How old is your vehicle?"
 
       - Example of what not to ask:
-        - What is license plate number?
+        - DO NOT ASK FOR license plate number or drivers license number
         - When is your birthday? (Instead just ask if they're over the required age for a policy)
         - DO NOT ASK FOR ZIP CODE OR PERSONAL INFORMATION
 

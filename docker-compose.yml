@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./insurance-recommendation-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./insurance-recommendation-backend:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: production
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./insurance-recommendation-frontend
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
