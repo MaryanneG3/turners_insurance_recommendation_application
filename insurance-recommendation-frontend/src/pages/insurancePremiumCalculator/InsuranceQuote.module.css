@@ -1,0 +1,189 @@
+.mainContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.leftSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+}
+
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  height: 450px;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  border-radius: 30px;
+  border: none;
+  box-shadow: 0 0 10px 2px rgba(64, 189, 247, 0.5);
+  background-color: azure;
+}
+
+.previewImg {
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+  border-bottom: 1px solid #40bdf7;
+  overflow: hidden;
+}
+
+.uploadImgPrompt {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadIcon {
+  font-size: 50px;
+  margin-bottom: 30px;
+  color: #40bdf7;
+}
+
+/* styling input button */
+
+.hiddenInput {
+  display: none;
+}
+
+/* Custom styled button */
+.customButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #57c6f9;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  margin-top: 20px;
+}
+
+.customButton:hover {
+  font-weight: 600;
+  box-shadow: 0 0 10px 2px rgba(64, 189, 247, 0.5);
+}
+
+/* Right section ----------------------------------------------------------------*/
+
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  /* background-color: aquamarine; */
+}
+
+.predictionResultsCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
+  /* padding-bottom: 20px; */
+
+  /* background-color: pink; */
+}
+
+.predictionResultsCont h3 {
+  margin-bottom: 10px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  padding: 5px;
+  margin: 10px;
+  border-bottom: 1px rgb(63, 63, 173) solid;
+
+  /* background-color: pink; */
+}
+
+.list h5 {
+  width: 50%;
+  /* background-color: #57c6f9; */
+}
+
+.resultPercentage {
+  text-align: right;
+  /* background-color: green; */
+}
+
+/* Display results section ------------------------------------------------------------- */
+
+.insurancePremiumAmount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 40%;
+
+  margin-top: 40px;
+  padding-inline: 80px;
+
+  /* background-color: rgb(85, 237, 107); */
+}
+
+/* .ipContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 1px rgb(63, 63, 173) solid;
+  height: 100%;
+} */
+
+.apCont2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  /* background-color: pink; */
+}
+
+.cont3 {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  padding: 15px 10px;
+  margin: 5px;
+  width: 100%;
+
+  /* background-color: green; */
+}
+
+.apCont2 h3 {
+  margin-bottom: 25px;
+  /* background-color: green; */
+}
+
+.cont3 span {
+  display: flex;
+  align-items: right;
+  padding: 10px 20px 10px 0;
+  border-bottom: 1px rgb(63, 63, 173) solid;
+
+  /* background-color: rgb(187, 230, 29); */
+}

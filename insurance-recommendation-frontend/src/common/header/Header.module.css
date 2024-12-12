@@ -1,0 +1,19 @@
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  height: 65px;
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.navlinks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

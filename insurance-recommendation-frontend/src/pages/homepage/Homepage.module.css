@@ -1,0 +1,167 @@
+.mainContentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-right: 40px;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 350px;
+}
+
+.imageContainer img {
+  width: 100%;
+  border-radius: 0 10px 10px 0;
+}
+
+.promotionalImgtxtContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 300px;
+  height: 280px;
+  padding: 25px;
+  margin-left: auto;
+  border: solid 1px #82c0f0; /* temporary */
+  border-radius: 10px 0 0 10px;
+}
+
+.promotionalImgtxtContainer h3 {
+  margin-bottom: 20px;
+}
+
+.insuranceQuoteBtn {
+  display: flex;
+  width: 200px;
+  margin-top: 20px;
+  padding: 10px;
+  font-weight: 600;
+  border-radius: 12px;
+
+  text-decoration: none;
+  background-color: #40bdf7;
+  color: #ffffff;
+}
+
+.insuranceQuoteBtn:hover {
+  background-color: #8dd1f0;
+}
+
+.promotionalImgtxtContainer p,
+.tob p {
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.tob {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 350px;
+  height: 80%;
+  padding: 25px;
+  border-radius: 10px;
+  border: solid 1px #82c0f0; /* temporary */
+
+  border-radius: 0 10px 10px 0;
+}
+
+.tob h3 {
+  margin-bottom: auto;
+}
+
+.tobLinksContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: auto;
+}
+
+.tobLinksContainer a {
+  text-decoration: none;
+  color: black;
+  padding: 10px 0;
+}
+
+.tobLinksContainer a:hover {
+  font-weight: 900;
+}
+
+/* ------------------------------------------------------------------- */
+
+.bottomSection {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 100%;
+}
+
+.introSection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 250px;
+  padding: 20px 40px;
+}
+
+.introSection a {
+  text-decoration: none;
+  color: rgb(11, 11, 133);
+}
+
+.introSection h1,
+.mbiSection h2,
+.ciSection h2 {
+  margin-bottom: 50px;
+}
+
+.introSection p {
+  margin-bottom: 20px;
+}
+
+.introSection a {
+  margin: 5px 10px;
+}
+
+.icon {
+  margin-inline: 15px;
+  color: rgb(143, 51, 65);
+}
+
+/* ---------------------------------------------------- */
+
+.mbiSection,
+.ciSection {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 40px 80px;
+}
+
+.cover {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+.mbiInfo p {
+  line-height: 1.5;
+}
