@@ -12,7 +12,7 @@ function InsuranceRecommendationAI() {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3000/start-chat", {
+      const response = await fetch("http://localhost:3000/tina/start-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -58,11 +58,14 @@ function InsuranceRecommendationAI() {
     ]);
 
     try {
-      const response = await fetch("http://localhost:3000/process-response", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userResponse }),
-      });
+      const response = await fetch(
+        "http://localhost:3000/tina/process-response",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userResponse }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
