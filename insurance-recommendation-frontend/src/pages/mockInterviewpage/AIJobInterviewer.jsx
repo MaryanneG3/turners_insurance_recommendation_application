@@ -22,11 +22,14 @@ const AIJobInterviewer = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3000/start-interview", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ role }),
-      });
+      const response = await fetch(
+        "http://localhost:3000/interviewer/start-interview",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ role }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -55,11 +58,14 @@ const AIJobInterviewer = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3000/next-question", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId, userResponse }),
-      });
+      const response = await fetch(
+        "http://localhost:3000/interviewer/next-question",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId, userResponse }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to generate the next question.");
@@ -90,11 +96,14 @@ const AIJobInterviewer = () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3000/end-interview", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId, responses }),
-      });
+      const response = await fetch(
+        "http://localhost:3000/interviewer/end-interview",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionId, responses }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to generate feedback.");
