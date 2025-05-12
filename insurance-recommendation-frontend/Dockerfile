@@ -1,7 +1,7 @@
 # Build stage
 
 # this basically means that we are using the Node.js 20 image as the base image for our Dockerfile.
-FROM node:20 AS build
+FROM node:20-slim AS build
 
 # this sets the working directory in the container to /app.
 # same as back but multiple stages
