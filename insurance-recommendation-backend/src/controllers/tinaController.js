@@ -1,26 +1,24 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const dotenv = require("dotenv");
-dotenv.config();
+require("dotenv").config();
 
-// Initialize Google Generative AI
 const genAI = new GoogleGenerativeAI(process.env.GENERATIVE_AI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-// In-memory state for interview progress
 const session = {};
 
-// Endpoint for starting the conversation with Tina is here <----------------------------------
 const startChat = async (req, res) => {
   const { prompt } = req.body;
 
   try {
-    const introductionPrompt = prompt;
-    const introductionResult = await model.generateContent(introductionPrompt);
+    const introductionResult = await model.generateContent(prompt);
     const introductionResponse = introductionResult.response.text();
 
     const sessionId = `session-${Date.now()}`;
     session[sessionId] = {
-      history: [{ TinasResponse: introductionResponse }, { UsersResponse: "" }],
+      history: [{ TinasResponse: introductionResponse }],
+      hasAnsweredOptIn: false,
+      questionCount: 0,
+      recommendationGiven: false,
     };
 
     res.json({
@@ -28,43 +26,40 @@ const startChat = async (req, res) => {
       tinasResponse: introductionResponse,
     });
   } catch (err) {
-    console.error(
-      "Tina failed to start the conversation. Tina is getting fired today.",
-      err
-    );
+    console.error("Tina failed to start the conversation:", err);
     res.status(500).json({ error: "Error fetching response from Tina" });
   }
 };
 
-// Endpoint for handling the responses from the user <---------------------------------
-
 const processResponse = async (req, res) => {
   const { userResponse } = req.body;
-  const sessionId = Object.keys(session)[0]; // Retrieve the session ID (assuming single session for simplicity)
+  const sessionId = Object.keys(session)[0];
 
   try {
-    // Check if this is the user's first response (to the opt-in question)
-    const isFirstQuestion = !session[sessionId]?.hasAnsweredOptIn; // If the 'hasAnsweredOptIn' is not set, it's the first question
+    const currentSession = session[sessionId];
 
-    // If the user says "no" to the opt-in question, end the conversation
-    if (isFirstQuestion && userResponse.trim().toLowerCase() === "no") {
-      const exitPrompt = `The user has indicated they do not wish to proceed with answering questions. Respond politely and let them know the conversation will end.`;
+    if (
+      !currentSession.hasAnsweredOptIn &&
+      userResponse.trim().toLowerCase() === "no"
+    ) {
+      const exitPrompt = `The user has declined to continue. Respond politely and end the chat.`;
       const exitResponse = await model.generateContent(exitPrompt);
       const exitText = exitResponse.response.text();
 
-      // Update session history and set the flag that the user has opted out
-      session[sessionId].history.push({ UsersResponse: userResponse });
-      session[sessionId].history.push({ TinasResponse: exitText });
-
-      // Set the flag indicating the opt-in question has been answered
-      session[sessionId].hasAnsweredOptIn = true;
+      currentSession.history.push(
+        { UsersResponse: userResponse },
+        { TinasResponse: exitText }
+      );
+      currentSession.hasAnsweredOptIn = true;
 
       return res.json({ tinasResponse: exitText });
     }
 
-    // Otherwise, continue with the rest of the conversation
-    // Generate conversation history for context
-    const historyContext = session[sessionId].history
+    currentSession.history.push({ UsersResponse: userResponse });
+    currentSession.hasAnsweredOptIn = true;
+    currentSession.questionCount++;
+
+    const historyContext = currentSession.history
       .map((entry) =>
         entry.TinasResponse
           ? `Tina: ${entry.TinasResponse}`
@@ -72,62 +67,42 @@ const processResponse = async (req, res) => {
       )
       .join("\n");
 
-    // Dynamic prompt incorporating user's response and history
-    const dynamicPrompt = `
-      You are Tina, a friendly and knowledgeable AI insurance consultant. Here is the conversation so far:
-      
+    let dynamicPrompt;
+
+    if (
+      currentSession.questionCount >= 9 &&
+      !currentSession.recommendationGiven
+    ) {
+      currentSession.recommendationGiven = true;
+      dynamicPrompt = `You are Tina, a friendly and enthusiatic AI insurance advisor. Here is the full conversation so far:
+
+${historyContext}
+
+Based on the information collected, recommend an insurance policy that best suits the user's needs, explaining why you chose to suggest that particular policy. Use specific user responses to explain your reasoning. Your response should be detailed, friendly, and help the user understand why the recommendation fits them. If more clarity is needed, feel free to ask a follow-up question, but provide a preliminary recommendation first.`;
+    } else {
+      dynamicPrompt = `You are Tina, a friendly and knowledgeable AI insurance consultant. Here is the conversation so far:
+
       ${historyContext}
 
-      Based on the user's most recent response: "${userResponse}", ask the next most relevant question to gather information about their vehicle or insurance needs. 
-      
-      Only ask one question at a time. Do not repeat questions or responses already provided. Focus on:
-      - Vehicle type (e.g., car, truck, racing car)
-      - Purpose of coverage (e.g., own vehicle, third party only)
-      - Age of the vehicle (less than 10 years or older)
-      - Avoid directly asking users what insurance product they want. Instead, ask questions that help determine the best product.
-      - Ensure that questions are not repetitive and dynamically adjust based on the user's previous responses. Use the following categories to guide your questioning:
-      - **Vehicle type** (e.g., car, truck, racing car)
-      - **Purpose of coverage** (e.g., own vehicle, third party only)
-      - **Age of the vehicle** (less than 10 years or older)
+      Based on the user's latest response: "${userResponse}", ask the next most relevant question to learn more about their vehicle or insurance needs.
 
-      - Example Questions:
-        - "What kind of vehicle do you drive?"
-        - "Do you need insurance to cover damage to your car or just liability to others?"
-        - "How old is your vehicle?"
+      Do not repeat any previous questions. Ensure the next question:
+      - Focuses on vehicle type, coverage purpose, or age
+      - Is unique based on the conversation
+      - Avoids personal data (e.g., birthday, address)
+      - Avoids asking the user to suggest a response
+      - Do not ask the user what level of coverage they want. Use your judgment based on prior responses.
 
-      - Example of what not to ask:
-        - DO NOT ASK FOR license plate number or drivers license number
-        - When is your birthday? (Instead just ask if they're over the required age for a policy)
-        - DO NOT ASK FOR ZIP CODE OR PERSONAL INFORMATION
+      Once sufficient information is collected (usually by 10 questions), begin providing a recommendation.
 
-      **Recommendation:**
-        - Based on the user's responses, recommend one or more of the following insurance products:
-        
-        1. **Mechanical Breakdown Insurance (MBI):** Covers repairs due to mechanical failure. Not available for trucks and racing cars.
-        2. **Comprehensive Car Insurance:** Covers damages to both your vehicle and third-party vehicles. Only available for vehicles less than 10 years old.
-        3. **Third Party Car Insurance:** Covers damages to other people's vehicles but not your own.
-
-      - Explain your recommendation clearly, providing reasons based on the user's input. Example:
-      - "Based on your responses, I recommend Comprehensive Car Insurance because it provides full coverage for both your vehicle and third-party damages. Since your vehicle is under 10 years old, it qualifies for this policy."
-      - Be polite and offer to provide more details if needed.
-
-    ### Follow these Business Rules:
-      1. **Mechanical Breakdown Insurance (MBI):** Not available for trucks and racing cars.
-      2. **Comprehensive Car Insurance:** Only available for vehicles less than 10 years old.
-
-      Ensure your response is friendly, concise, and conversational. Example:
-      - "Thanks for sharing! Can you tell me what kind of vehicle you drive?"
-    `;
+      Avoid greeting the user again when giving your recommendation. Instead, say something like "Based on our conversation, I recommend the following insurance policy..."
+      `;
+    }
 
     const response = await model.generateContent(dynamicPrompt);
     const textResponse = response.response.text();
 
-    // Update session history
-    session[sessionId].history.push({ UsersResponse: userResponse });
-    session[sessionId].history.push({ TinasResponse: textResponse });
-
-    // Set the flag that the opt-in question has been answered
-    session[sessionId].hasAnsweredOptIn = true;
+    currentSession.history.push({ TinasResponse: textResponse });
 
     res.json({ tinasResponse: textResponse });
   } catch (err) {

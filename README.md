@@ -1,106 +1,119 @@
-# Turners Insurance Recommendation Application
+# Turners Insurance Recommendation App
 
-## Overview
-The **Turners Insurance Recommendation Application** is a web-based tool designed to provide insurance recommendations based on user input. The application features an AI-driven recommendation system, an insurance premium calculator, and a mock job interview AI.
+This full-stack web application helps users explore insurance options using smart AI-powered tools. It features a clean interface and two main tools designed to assist with insurance-related decisions. The entire application is containerized using Docker, making it easy to deploy and run consistently across different environments.
 
-The project consists of two main components:
-- **Frontend:** Built with React and Vite.
-- **Backend:** A Node.js and Express-based API.
+---
 
-## Features
-### **1. Insurance Recommendation AI**
-- Located in the **Tools** dropdown menu.
-- Provides personalized insurance recommendations based on user responses.
+## 🔧 Tools Overview
 
-### **2. Insurance Premium Calculator**
-- Allows users to estimate insurance premiums.
+Users can access tools via the **"Tools"** dropdown in the navigation bar.
 
-### **3. AI Job Interviewer**
-- Conducts mock job interviews to help users prepare for real interviews.
+### 1. 🧠 Insurance Recommendation AI – _Tina the Chatbot_
 
-## Folder Structure
-```plaintext
-├── README.md
-├── docker-compose.yml
-├── insurance-recommendation-backend/
-│   ├── Dockerfile
-│   ├── package.json
-│   ├── src/
-│       ├── index.js
-│       ├── controllers/
-│       │   ├── interviewerController.js
-│       │   └── tinaController.js
-│       └── routes/
-│           ├── interviewerRoutes.js
-│           └── tinaRoutes.js
-└── insurance-recommendation-frontend/
-    ├── README.md
-    ├── Dockerfile
-    ├── package.json
-    ├── vite.config.js
-    ├── src/
-        ├── App.jsx
-        ├── components/
-        ├── layouts/
-        ├── pages/
-            ├── homepage/
-            ├── insurancePremiumCalculator/
-            ├── insuranceRecommendationAI/
-            └── mockInterviewpage/
+- **Purpose:** Helps users decide which insurance policy is right for them.
+- **Functionality:**
+
+  - Chat-based interface with **Tina**, an AI assistant.
+  - Asks a series of questions about the user’s driving habits, vehicle, and needs.
+  - Recommends a suitable insurance policy.
+  - Explains the reasoning behind the recommendation.
+
+- **Powered by:** Google Generative AI.
+
+### 2. 🚗 Insurance Premium Calculator (Vehicle Detection)
+
+- **Purpose:** Suggests an estimated insurance premium based on the vehicle type.
+- **Functionality:**
+
+  - Users upload a photo of a vehicle.
+  - Uses **Custom Vision AI** to identify the type of vehicle.
+  - Returns an estimated premium based on classification.
+
+- **Status:** Under development — subject to refinement.
+
+---
+
+## ⚙️ Local Development Setup
+
+### Prerequisites
+
+- Node.js v20+ (for manual setup)
+- Docker (for containerized setup)
+
+### Manual (non-Docker) Setup
+
+1. **Clone the repo**
+
+```bash
+git clone https://github.com/MaryanneG3/turners_insurance_recommendation_application.git
+cd insurance-recommendation-app
 ```
 
-## Installation & Running the Application
-### **1. Prerequisites**
-Ensure you have the following installed:
-- Node.js (v20.18.0)
-- Docker
-- Docker Compose
+2. **Start the frontend**
 
-### **2. Clone the Repository**
-```sh
-git clone https://github.com/your-repo/maryanneg3-turners_insurance_recommendation_application.git
-cd maryanneg3-turners_insurance_recommendation_application
-```
-
-### **3. Run with Docker Compose**
-```sh
-docker-compose up --build
-```
-
-This will start both the frontend and backend services.
-
-### **4. Running Locally Without Docker**
-#### **Backend**
-```sh
-cd insurance-recommendation-backend
-npm install
-npm start
-```
-
-#### **Frontend**
-```sh
+```bash
 cd insurance-recommendation-frontend
 npm install
 npm run dev
 ```
-The frontend will be available at `http://localhost:5173/`.
 
-## Accessing Features
-### **1. Insurance Recommendation AI**
-- Navigate to the **Tools** dropdown menu in the navbar.
-- Click on **Insurance Recommendation AI** to start the questionnaire.
+3. **Start the backend**
 
-### **2. Insurance Premium Calculator**
-- Navigate to the **Tools** dropdown menu.
-- Click **Insurance Premium Calculator** to input vehicle details and get an estimate.
+```bash
+cd ../insurance-recommendation-backend
+npm install
+npm run dev
+```
 
-### **3. AI Job Interviewer**
-- Navigate to the **Tools** dropdown menu.
-- Click **Mock Interview AI** to simulate a job interview experience.
+---
 
-## Contributing
-Pull requests are welcome. Please open an issue first to discuss any major changes.
+## 🐳 Docker Setup (Recommended)
 
-## License
-This project is licensed under the MIT License.
+For users who prefer Docker:
 
+### Step 1: Build and run the containers
+
+Ensure Docker is installed, then run:
+
+```bash
+# From the project root where docker-compose.yml exists (if added)
+docker-compose up --build
+```
+
+If you're running services separately, you can also:
+
+```bash
+# Backend
+cd insurance-recommendation-backend
+docker build -t insurance-backend .
+docker run -p 3002:3002 insurance-backend
+
+# Frontend
+cd ../insurance-recommendation-frontend
+docker build -t insurance-frontend .
+docker run -p 5173:5173 insurance-frontend
+```
+
+### Step 2: Access the app
+
+- Frontend: [http://localhost:5173](http://localhost:5173)
+- Backend API: [http://localhost:3002](http://localhost:3002)
+
+> Make sure `.env` files (if used) are present inside both `frontend` and `backend` folders or set up with `docker-compose`.
+
+---
+
+## 📦 Tech Stack
+
+- **Frontend:** React (Vite)
+- **Backend:** Node.js + Express
+- **AI:** Google Generative AI, Custom Vision
+- **Containerization:** Docker
+
+---
+
+## 📌 Notes
+
+- ✅ Insurance Recommendation AI is complete and functional.
+- ⚠️ Insurance Premium Calculator is in active development.
+- ❌ Mock Interview AI is not documented here.

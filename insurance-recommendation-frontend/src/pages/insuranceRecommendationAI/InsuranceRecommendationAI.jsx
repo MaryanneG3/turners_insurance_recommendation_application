@@ -7,12 +7,12 @@ function InsuranceRecommendationAI() {
   const [error, setError] = useState(null);
   const [responses, setResponses] = useState([]);
 
-  // START CHAT HERE < -------------------------------------------------------
+  // START CHAT HERE
   const startChat = async () => {
     setError(null);
 
     try {
-      const response = await fetch("http://localhost:3000/tina/start-chat", {
+      const response = await fetch("http://localhost:3002/tina/start-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -29,6 +29,7 @@ function InsuranceRecommendationAI() {
       }
 
       const data = await response.json();
+      console.log(data);
 
       setSessionId(data.sessionId);
       setResponses([{ type: "tina", text: data.tinasResponse }]);
@@ -42,7 +43,7 @@ function InsuranceRecommendationAI() {
     startChat();
   }, []);
 
-  // HANDLE RESPONSES HERE < -------------------------------------------------------
+  // HANDLE RESPONSES HERE
   const handleResponse = async (userResponse) => {
     if (!userResponse.trim()) {
       alert("Please provide a valid response.");
@@ -59,7 +60,7 @@ function InsuranceRecommendationAI() {
 
     try {
       const response = await fetch(
-        "http://localhost:3000/tina/process-response",
+        "http://localhost:3002/tina/process-response",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -73,6 +74,7 @@ function InsuranceRecommendationAI() {
       }
 
       const data = await response.json();
+      console.log("Response received:", data);
 
       // Add Tina's response to the state
       setResponses((prevResponses) => [

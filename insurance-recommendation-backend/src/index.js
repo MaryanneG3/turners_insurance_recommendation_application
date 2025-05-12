@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const tinaRoutes = require("./routes/tinaRoutes");
 const interviewerRoutes = require("./routes/interviewerRoutes");
+require("dotenv").config();
 
 const app = express();
 
@@ -15,7 +16,7 @@ apiRouter.use(interviewerRoutes);
 app.use(cors());
 app.use(express.json());
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3002;
 
 app.use("/tina", apiRouter);
 app.use("/interviewer", interviewerRoutes);

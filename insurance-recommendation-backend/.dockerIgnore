@@ -1,0 +1,16 @@
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+.env
+docker-compose.override.yml
+Dockerfile
+dist/
+build/
+tmp/
+test/
+tests/
+*.test.js
+*.spec.js
+.git/
+.gitignore

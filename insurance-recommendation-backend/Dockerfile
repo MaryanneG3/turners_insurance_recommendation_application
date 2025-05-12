@@ -20,7 +20,7 @@ ENV NODE_ENV=production
 
 # Expose the backend port
 # 3k cause i used 3k in index.js
-EXPOSE 3000
+EXPOSE 3002
 
 # Start the application - index is in src folder
 CMD ["node", "src/index.js"]

@@ -1,6 +1,3 @@
-# don't need to specify version anymore
-version: "3.8"
-
 # docker-compose.yml notes
 # Defines services: It specifies both the frontend and backend as separate services, each with its own container built from their respective Dockerfile.
 # Links containers: It allows communication between the frontend and backend containers, typically through a defined network.
@@ -18,23 +15,22 @@ version: "3.8"
 
 services:
   backend:
-    build:
-      context: ./insurance-recommendation-backend
+    build: ./insurance-recommendation-backend
+    container_name: insurance-recommendation-backend
     ports:
-      - "3000:3000"
-    volumes:
-      - ./insurance-recommendation-backend:/app
-      - /app/node_modules
+      - "3002:3002"
     environment:
       NODE_ENV: production
     networks:
       - app-network
 
   frontend:
-    build:
-      context: ./insurance-recommendation-frontend
+    build: ./insurance-recommendation-frontend
+    container_name: insurance-recommendation-frontend
     ports:
       - "80:80"
+    depends_on:
+      - backend
     networks:
       - app-network
 
