@@ -45,7 +45,7 @@ Users can access tools via the **"Tools"** dropdown in the navigation bar.
 1. **Clone the repo**
 
 ```bash
-git clone https://github.com/your-username/insurance-recommendation-app.git
+git clone https://github.com/MaryanneG3/turners_insurance_recommendation_application.git
 cd insurance-recommendation-app
 ```
 
