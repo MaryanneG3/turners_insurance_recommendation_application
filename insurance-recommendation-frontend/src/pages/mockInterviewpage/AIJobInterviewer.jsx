@@ -23,7 +23,7 @@ const AIJobInterviewer = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/interviewer/start-question`,
+        `${import.meta.env.VITE_API_URL}/interviewer/start-interview`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
