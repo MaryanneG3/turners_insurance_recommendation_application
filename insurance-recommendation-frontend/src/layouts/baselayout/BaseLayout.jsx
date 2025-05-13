@@ -6,7 +6,7 @@ import styles from "./BaseLayout.module.css";
 import { useState } from "react";
 
 function BaseLayout({ children }) {
-  const [openVehicleMenu, setOpenVehicleMenu] = useState(true);
+  const [openVehicleMenu, setOpenVehicleMenu] = useState(false);
 
   const toggleVehicleMenu = () => {
     setOpenVehicleMenu(!openVehicleMenu);
