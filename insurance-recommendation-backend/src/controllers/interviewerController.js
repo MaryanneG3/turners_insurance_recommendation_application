@@ -3,7 +3,7 @@ require("dotenv").config();
 
 // Initialize Google Generative AI
 const genAI = new GoogleGenerativeAI(process.env.GENERATIVE_AI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: process.env.GEN_MODEL });
 
 // In-memory state for interview progress
 const interviews = {}; // Tracks questions count and history for each session

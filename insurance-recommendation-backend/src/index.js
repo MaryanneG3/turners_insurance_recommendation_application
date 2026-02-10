@@ -22,5 +22,5 @@ app.use("/tina", apiRouter);
 app.use("/interviewer", interviewerRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Tina Server running at http://localhost:${PORT}`);
 });
