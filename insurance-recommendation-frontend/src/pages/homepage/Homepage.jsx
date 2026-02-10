@@ -28,31 +28,35 @@ export default function Homepage() {
           </div>
 
           <div className={styles.promotionalImgtxtContainer}>
-            <h3>Protect yourself against unexpected costs.</h3>
-            <p>
-              If you own or buy a second hand car, make sure you’re covered for
-              unforeseen and sudden mechanical and electrical breakdowns.
-            </p>
+            <div className={styles.promotionalText}>
+              <h3>Find the right insurance for you in minutes.</h3>
+              <p>
+                Use our AI-powered recommendation tool to discover the insurance
+                policy that best matches your needs, budget, and lifestyle.
+                Answer a few quick questions and get personalised policy
+                suggestions instantly.
+              </p>
 
-            <NavLink
-              to="/tools/insurance-quote-estimation-calculator"
-              className={styles.insuranceQuoteBtn}
-            >
-              Get a Quote Today!
-            </NavLink>
-          </div>
+              <NavLink
+                to="/tools/insurance-recommendation-ai"
+                className={styles.insuranceQuoteBtn}
+              >
+                Get an Insurance Recommendation Today!
+              </NavLink>
+            </div>
 
-          <div className={styles.imageContainer}>
-            {/* flex row, space btwn - image carousel*/}
-            <img
-              src="/images/carousel/Toyota-5-seater-SUV.jpg"
-              alt="Toyota 5 Seater SUV"
-            />
+            <div className={styles.imageContainer}>
+              <img
+                src="/images/carousel/Toyota-5-seater-SUV.jpg"
+                alt="Toyota 5 Seater SUV"
+              />
+            </div>
           </div>
         </div>
 
         <div className={styles.bottomSection}>
           <section id="intro" className={styles.introSection}>
+            <h1>Disclaimer: The content below is filler content.</h1>
             <h1>Motor Vehicle Insurance</h1>
 
             <p>There are 2 main types of Motor Vehicle Insurance:</p>
