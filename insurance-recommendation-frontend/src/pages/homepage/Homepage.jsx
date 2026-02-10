@@ -56,6 +56,7 @@ export default function Homepage() {
 
         <div className={styles.bottomSection}>
           <section id="intro" className={styles.introSection}>
+            <h1>Disclaimer: The content below is filler content.</h1>
             <h1>Motor Vehicle Insurance</h1>
 
             <p>There are 2 main types of Motor Vehicle Insurance:</p>
