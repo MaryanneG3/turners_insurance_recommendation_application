@@ -2,7 +2,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 require("dotenv").config();
 
 const genAI = new GoogleGenerativeAI(process.env.GENERATIVE_AI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+const model = genAI.getGenerativeModel({ model: process.env.GEN_MODEL });
 
 const session = {};
 
@@ -48,7 +48,7 @@ const processResponse = async (req, res) => {
 
       currentSession.history.push(
         { UsersResponse: userResponse },
-        { TinasResponse: exitText }
+        { TinasResponse: exitText },
       );
       currentSession.hasAnsweredOptIn = true;
 
@@ -63,7 +63,7 @@ const processResponse = async (req, res) => {
       .map((entry) =>
         entry.TinasResponse
           ? `Tina: ${entry.TinasResponse}`
-          : `User: ${entry.UsersResponse}`
+          : `User: ${entry.UsersResponse}`,
       )
       .join("\n");
 
